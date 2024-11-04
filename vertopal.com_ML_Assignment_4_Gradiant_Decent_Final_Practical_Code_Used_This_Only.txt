@@ -1,0 +1,651 @@
+
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import sympy as sp
+
+    # Define the variable and function
+    x = sp.symbols('x')
+    function = (x + 3) ** 2 # Define the function y = (x + 3)^2
+
+    # Compute the derivative (gradient) of the function
+    derivative = sp.diff(function, x)
+
+    # Convert the derivative to a Python function
+    gf = sp.lambdify(x, derivative, 'numpy')
+
+    # Initialize parameters
+    x_current = 2  # Start
+    lr = 0.01  # Learning Rate
+    precision = 0.000001
+    previous_step_size = 1
+    max_iter = 10000
+    iters = 0
+
+    # List to store the values of x for plotting
+    gd = []
+
+    # Gradient Descent Loop
+    while precision < previous_step_size and iters < max_iter:
+        prev = x_current
+        x_current = x_current - lr * gf(prev)
+        previous_step_size = abs(x_current - prev)
+        iters += 1
+        print('Iteration: ', iters, 'Value: ',x_current)
+        gd.append(x_current)
+
+    Iteration:  1 Value:  1.9
+    Iteration:  2 Value:  1.8019999999999998
+    Iteration:  3 Value:  1.70596
+    Iteration:  4 Value:  1.6118408
+    Iteration:  5 Value:  1.519603984
+    Iteration:  6 Value:  1.42921190432
+    Iteration:  7 Value:  1.3406276662336
+    Iteration:  8 Value:  1.253815112908928
+    Iteration:  9 Value:  1.1687388106507495
+    Iteration:  10 Value:  1.0853640344377344
+    Iteration:  11 Value:  1.0036567537489798
+    Iteration:  12 Value:  0.9235836186740002
+    Iteration:  13 Value:  0.8451119463005202
+    Iteration:  14 Value:  0.7682097073745098
+    Iteration:  15 Value:  0.6928455132270196
+    Iteration:  16 Value:  0.6189886029624792
+    Iteration:  17 Value:  0.5466088309032295
+    Iteration:  18 Value:  0.4756766542851649
+    Iteration:  19 Value:  0.40616312119946163
+    Iteration:  20 Value:  0.3380398587754724
+    Iteration:  21 Value:  0.27127906159996296
+    Iteration:  22 Value:  0.2058534803679637
+    Iteration:  23 Value:  0.14173641076060442
+    Iteration:  24 Value:  0.07890168254539233
+    Iteration:  25 Value:  0.017323648894484484
+    Iteration:  26 Value:  -0.04302282408340521
+    Iteration:  27 Value:  -0.10216236760173711
+    Iteration:  28 Value:  -0.16011912024970237
+    Iteration:  29 Value:  -0.21691673784470833
+    Iteration:  30 Value:  -0.27257840308781417
+    Iteration:  31 Value:  -0.3271268350260579
+    Iteration:  32 Value:  -0.38058429832553675
+    Iteration:  33 Value:  -0.432972612359026
+    Iteration:  34 Value:  -0.4843131601118455
+    Iteration:  35 Value:  -0.5346268969096086
+    Iteration:  36 Value:  -0.5839343589714164
+    Iteration:  37 Value:  -0.632255671791988
+    Iteration:  38 Value:  -0.6796105583561483
+    Iteration:  39 Value:  -0.7260183471890252
+    Iteration:  40 Value:  -0.7714979802452447
+    Iteration:  41 Value:  -0.8160680206403399
+    Iteration:  42 Value:  -0.8597466602275331
+    Iteration:  43 Value:  -0.9025517270229825
+    Iteration:  44 Value:  -0.9445006924825228
+    Iteration:  45 Value:  -0.9856106786328723
+    Iteration:  46 Value:  -1.025898465060215
+    Iteration:  47 Value:  -1.0653804957590107
+    Iteration:  48 Value:  -1.1040728858438305
+    Iteration:  49 Value:  -1.1419914281269539
+    Iteration:  50 Value:  -1.1791515995644148
+    Iteration:  51 Value:  -1.2155685675731265
+    Iteration:  52 Value:  -1.2512571962216639
+    Iteration:  53 Value:  -1.2862320522972306
+    Iteration:  54 Value:  -1.320507411251286
+    Iteration:  55 Value:  -1.3540972630262602
+    Iteration:  56 Value:  -1.387015317765735
+    Iteration:  57 Value:  -1.4192750114104202
+    Iteration:  58 Value:  -1.4508895111822118
+    Iteration:  59 Value:  -1.4818717209585675
+    Iteration:  60 Value:  -1.512234286539396
+    Iteration:  61 Value:  -1.5419896008086083
+    Iteration:  62 Value:  -1.571149808792436
+    Iteration:  63 Value:  -1.5997268126165873
+    Iteration:  64 Value:  -1.6277322763642557
+    Iteration:  65 Value:  -1.6551776308369706
+    Iteration:  66 Value:  -1.6820740782202313
+    Iteration:  67 Value:  -1.7084325966558267
+    Iteration:  68 Value:  -1.7342639447227102
+    Iteration:  69 Value:  -1.759578665828256
+    Iteration:  70 Value:  -1.784387092511691
+    Iteration:  71 Value:  -1.808699350661457
+    Iteration:  72 Value:  -1.832525363648228
+    Iteration:  73 Value:  -1.8558748563752634
+    Iteration:  74 Value:  -1.8787573592477582
+    Iteration:  75 Value:  -1.901182212062803
+    Iteration:  76 Value:  -1.923158567821547
+    Iteration:  77 Value:  -1.9446953964651161
+    Iteration:  78 Value:  -1.9658014885358137
+    Iteration:  79 Value:  -1.9864854587650975
+    Iteration:  80 Value:  -2.0067557495897956
+    Iteration:  81 Value:  -2.026620634598
+    Iteration:  82 Value:  -2.04608822190604
+    Iteration:  83 Value:  -2.065166457467919
+    Iteration:  84 Value:  -2.0838631283185607
+    Iteration:  85 Value:  -2.1021858657521895
+    Iteration:  86 Value:  -2.1201421484371457
+    Iteration:  87 Value:  -2.137739305468403
+    Iteration:  88 Value:  -2.1549845193590347
+    Iteration:  89 Value:  -2.171884828971854
+    Iteration:  90 Value:  -2.188447132392417
+    Iteration:  91 Value:  -2.204678189744569
+    Iteration:  92 Value:  -2.2205846259496775
+    Iteration:  93 Value:  -2.236172933430684
+    Iteration:  94 Value:  -2.2514494747620706
+    Iteration:  95 Value:  -2.266420485266829
+    Iteration:  96 Value:  -2.2810920755614923
+    Iteration:  97 Value:  -2.2954702340502626
+    Iteration:  98 Value:  -2.3095608293692576
+    Iteration:  99 Value:  -2.3233696127818724
+    Iteration:  100 Value:  -2.336902220526235
+    Iteration:  101 Value:  -2.3501641761157104
+    Iteration:  102 Value:  -2.3631608925933962
+    Iteration:  103 Value:  -2.375897674741528
+    Iteration:  104 Value:  -2.3883797212466975
+    Iteration:  105 Value:  -2.4006121268217635
+    Iteration:  106 Value:  -2.4125998842853282
+    Iteration:  107 Value:  -2.4243478865996217
+    Iteration:  108 Value:  -2.4358609288676294
+    Iteration:  109 Value:  -2.447143710290277
+    Iteration:  110 Value:  -2.458200836084471
+    Iteration:  111 Value:  -2.4690368193627816
+    Iteration:  112 Value:  -2.479656082975526
+    Iteration:  113 Value:  -2.4900629613160152
+    Iteration:  114 Value:  -2.500261702089695
+    Iteration:  115 Value:  -2.510256468047901
+    Iteration:  116 Value:  -2.520051338686943
+    Iteration:  117 Value:  -2.5296503119132043
+    Iteration:  118 Value:  -2.53905730567494
+    Iteration:  119 Value:  -2.5482761595614414
+    Iteration:  120 Value:  -2.5573106363702127
+    Iteration:  121 Value:  -2.5661644236428085
+    Iteration:  122 Value:  -2.5748411351699523
+    Iteration:  123 Value:  -2.5833443124665534
+    Iteration:  124 Value:  -2.591677426217222
+    Iteration:  125 Value:  -2.599843877692878
+    Iteration:  126 Value:  -2.6078470001390204
+    Iteration:  127 Value:  -2.61569006013624
+    Iteration:  128 Value:  -2.623376258933515
+    Iteration:  129 Value:  -2.6309087337548447
+    Iteration:  130 Value:  -2.638290559079748
+    Iteration:  131 Value:  -2.6455247478981527
+    Iteration:  132 Value:  -2.6526142529401895
+    Iteration:  133 Value:  -2.6595619678813858
+    Iteration:  134 Value:  -2.666370728523758
+    Iteration:  135 Value:  -2.6730433139532828
+    Iteration:  136 Value:  -2.679582447674217
+    Iteration:  137 Value:  -2.685990798720733
+    Iteration:  138 Value:  -2.6922709827463183
+    Iteration:  139 Value:  -2.698425563091392
+    Iteration:  140 Value:  -2.7044570518295643
+    Iteration:  141 Value:  -2.7103679107929732
+    Iteration:  142 Value:  -2.7161605525771138
+    Iteration:  143 Value:  -2.7218373415255717
+    Iteration:  144 Value:  -2.72740059469506
+    Iteration:  145 Value:  -2.7328525828011587
+    Iteration:  146 Value:  -2.7381955311451356
+    Iteration:  147 Value:  -2.743431620522233
+    Iteration:  148 Value:  -2.748562988111788
+    Iteration:  149 Value:  -2.7535917283495523
+    Iteration:  150 Value:  -2.7585198937825615
+    Iteration:  151 Value:  -2.76334949590691
+    Iteration:  152 Value:  -2.768082505988772
+    Iteration:  153 Value:  -2.7727208558689966
+    Iteration:  154 Value:  -2.777266438751617
+    Iteration:  155 Value:  -2.7817211099765844
+    Iteration:  156 Value:  -2.7860866877770527
+    Iteration:  157 Value:  -2.790364954021512
+    Iteration:  158 Value:  -2.7945576549410815
+    Iteration:  159 Value:  -2.79866650184226
+    Iteration:  160 Value:  -2.802693171805415
+    Iteration:  161 Value:  -2.8066393083693066
+    Iteration:  162 Value:  -2.8105065222019205
+    Iteration:  163 Value:  -2.8142963917578823
+    Iteration:  164 Value:  -2.818010463922725
+    Iteration:  165 Value:  -2.82165025464427
+    Iteration:  166 Value:  -2.8252172495513848
+    Iteration:  167 Value:  -2.828712904560357
+    Iteration:  168 Value:  -2.83213864646915
+    Iteration:  169 Value:  -2.8354958735397666
+    Iteration:  170 Value:  -2.838785956068971
+    Iteration:  171 Value:  -2.842010236947592
+    Iteration:  172 Value:  -2.84517003220864
+    Iteration:  173 Value:  -2.8482666315644676
+    Iteration:  174 Value:  -2.851301298933178
+    Iteration:  175 Value:  -2.8542752729545144
+    Iteration:  176 Value:  -2.857189767495424
+    Iteration:  177 Value:  -2.8600459721455156
+    Iteration:  178 Value:  -2.8628450527026055
+    Iteration:  179 Value:  -2.8655881516485535
+    Iteration:  180 Value:  -2.8682763886155827
+    Iteration:  181 Value:  -2.870910860843271
+    Iteration:  182 Value:  -2.8734926436264057
+    Iteration:  183 Value:  -2.8760227907538773
+    Iteration:  184 Value:  -2.8785023349388
+    Iteration:  185 Value:  -2.880932288240024
+    Iteration:  186 Value:  -2.8833136424752235
+    Iteration:  187 Value:  -2.885647369625719
+    Iteration:  188 Value:  -2.8879344222332044
+    Iteration:  189 Value:  -2.8901757337885403
+    Iteration:  190 Value:  -2.8923722191127696
+    Iteration:  191 Value:  -2.894524774730514
+    Iteration:  192 Value:  -2.896634279235904
+    Iteration:  193 Value:  -2.898701593651186
+    Iteration:  194 Value:  -2.900727561778162
+    Iteration:  195 Value:  -2.9027130105425987
+    Iteration:  196 Value:  -2.9046587503317465
+    Iteration:  197 Value:  -2.9065655753251116
+    Iteration:  198 Value:  -2.9084342638186094
+    Iteration:  199 Value:  -2.910265578542237
+    Iteration:  200 Value:  -2.9120602669713924
+    Iteration:  201 Value:  -2.9138190616319646
+    Iteration:  202 Value:  -2.915542680399325
+    Iteration:  203 Value:  -2.9172318267913386
+    Iteration:  204 Value:  -2.918887190255512
+    Iteration:  205 Value:  -2.920509446450402
+    Iteration:  206 Value:  -2.9220992575213938
+    Iteration:  207 Value:  -2.9236572723709657
+    Iteration:  208 Value:  -2.9251841269235466
+    Iteration:  209 Value:  -2.9266804443850756
+    Iteration:  210 Value:  -2.928146835497374
+    Iteration:  211 Value:  -2.9295838987874263
+    Iteration:  212 Value:  -2.9309922208116777
+    Iteration:  213 Value:  -2.932372376395444
+    Iteration:  214 Value:  -2.933724928867535
+    Iteration:  215 Value:  -2.9350504302901843
+    Iteration:  216 Value:  -2.9363494216843806
+    Iteration:  217 Value:  -2.937622433250693
+    Iteration:  218 Value:  -2.938869984585679
+    Iteration:  219 Value:  -2.9400925848939656
+    Iteration:  220 Value:  -2.9412907331960865
+    Iteration:  221 Value:  -2.9424649185321647
+    Iteration:  222 Value:  -2.9436156201615216
+    Iteration:  223 Value:  -2.944743307758291
+    Iteration:  224 Value:  -2.9458484416031254
+    Iteration:  225 Value:  -2.946931472771063
+    Iteration:  226 Value:  -2.9479928433156415
+    Iteration:  227 Value:  -2.9490329864493288
+    Iteration:  228 Value:  -2.9500523267203422
+    Iteration:  229 Value:  -2.9510512801859354
+    Iteration:  230 Value:  -2.952030254582217
+    Iteration:  231 Value:  -2.9529896494905725
+    Iteration:  232 Value:  -2.953929856500761
+    Iteration:  233 Value:  -2.954851259370746
+    Iteration:  234 Value:  -2.955754234183331
+    Iteration:  235 Value:  -2.9566391494996647
+    Iteration:  236 Value:  -2.9575063665096715
+    Iteration:  237 Value:  -2.958356239179478
+    Iteration:  238 Value:  -2.9591891143958886
+    Iteration:  239 Value:  -2.9600053321079707
+    Iteration:  240 Value:  -2.960805225465811
+    Iteration:  241 Value:  -2.9615891209564946
+    Iteration:  242 Value:  -2.9623573385373647
+    Iteration:  243 Value:  -2.9631101917666176
+    Iteration:  244 Value:  -2.963847987931285
+    Iteration:  245 Value:  -2.9645710281726596
+    Iteration:  246 Value:  -2.9652796076092063
+    Iteration:  247 Value:  -2.965974015457022
+    Iteration:  248 Value:  -2.9666545351478817
+    Iteration:  249 Value:  -2.967321444444924
+    Iteration:  250 Value:  -2.9679750155560254
+    Iteration:  251 Value:  -2.9686155152449047
+    Iteration:  252 Value:  -2.969243204940007
+    Iteration:  253 Value:  -2.9698583408412067
+    Iteration:  254 Value:  -2.9704611740243827
+    Iteration:  255 Value:  -2.9710519505438953
+    Iteration:  256 Value:  -2.9716309115330173
+    Iteration:  257 Value:  -2.9721982933023567
+    Iteration:  258 Value:  -2.9727543274363097
+    Iteration:  259 Value:  -2.9732992408875836
+    Iteration:  260 Value:  -2.973833256069832
+    Iteration:  261 Value:  -2.9743565909484353
+    Iteration:  262 Value:  -2.9748694591294664
+    Iteration:  263 Value:  -2.9753720699468773
+    Iteration:  264 Value:  -2.9758646285479395
+    Iteration:  265 Value:  -2.9763473359769805
+    Iteration:  266 Value:  -2.976820389257441
+    Iteration:  267 Value:  -2.9772839814722922
+    Iteration:  268 Value:  -2.9777383018428463
+    Iteration:  269 Value:  -2.9781835358059894
+    Iteration:  270 Value:  -2.9786198650898696
+    Iteration:  271 Value:  -2.9790474677880723
+    Iteration:  272 Value:  -2.979466518432311
+    Iteration:  273 Value:  -2.9798771880636648
+    Iteration:  274 Value:  -2.9802796443023913
+    Iteration:  275 Value:  -2.9806740514163437
+    Iteration:  276 Value:  -2.9810605703880166
+    Iteration:  277 Value:  -2.981439358980256
+    Iteration:  278 Value:  -2.981810571800651
+    Iteration:  279 Value:  -2.9821743603646382
+    Iteration:  280 Value:  -2.9825308731573457
+    Iteration:  281 Value:  -2.982880255694199
+    Iteration:  282 Value:  -2.983222650580315
+    Iteration:  283 Value:  -2.983558197568709
+    Iteration:  284 Value:  -2.983887033617335
+    Iteration:  285 Value:  -2.984209292944988
+    Iteration:  286 Value:  -2.9845251070860885
+    Iteration:  287 Value:  -2.984834604944367
+    Iteration:  288 Value:  -2.9851379128454796
+    Iteration:  289 Value:  -2.98543515458857
+    Iteration:  290 Value:  -2.9857264514967983
+    Iteration:  291 Value:  -2.9860119224668624
+    Iteration:  292 Value:  -2.9862916840175253
+    Iteration:  293 Value:  -2.9865658503371746
+    Iteration:  294 Value:  -2.986834533330431
+    Iteration:  295 Value:  -2.987097842663822
+    Iteration:  296 Value:  -2.987355885810546
+    Iteration:  297 Value:  -2.987608768094335
+    Iteration:  298 Value:  -2.9878565927324483
+    Iteration:  299 Value:  -2.9880994608777995
+    Iteration:  300 Value:  -2.9883374716602438
+    Iteration:  301 Value:  -2.988570722227039
+    Iteration:  302 Value:  -2.988799307782498
+    Iteration:  303 Value:  -2.989023321626848
+    Iteration:  304 Value:  -2.989242855194311
+    Iteration:  305 Value:  -2.989457998090425
+    Iteration:  306 Value:  -2.9896688381286163
+    Iteration:  307 Value:  -2.989875461366044
+    Iteration:  308 Value:  -2.9900779521387233
+    Iteration:  309 Value:  -2.990276393095949
+    Iteration:  310 Value:  -2.99047086523403
+    Iteration:  311 Value:  -2.9906614479293494
+    Iteration:  312 Value:  -2.9908482189707626
+    Iteration:  313 Value:  -2.9910312545913476
+    Iteration:  314 Value:  -2.9912106294995207
+    Iteration:  315 Value:  -2.9913864169095303
+    Iteration:  316 Value:  -2.99155868857134
+    Iteration:  317 Value:  -2.991727514799913
+    Iteration:  318 Value:  -2.9918929645039145
+    Iteration:  319 Value:  -2.9920551052138364
+    Iteration:  320 Value:  -2.99221400310956
+    Iteration:  321 Value:  -2.9923697230473687
+    Iteration:  322 Value:  -2.9925223285864213
+    Iteration:  323 Value:  -2.992671882014693
+    Iteration:  324 Value:  -2.9928184443743993
+    Iteration:  325 Value:  -2.9929620754869113
+    Iteration:  326 Value:  -2.993102833977173
+    Iteration:  327 Value:  -2.9932407772976295
+    Iteration:  328 Value:  -2.993375961751677
+    Iteration:  329 Value:  -2.993508442516643
+    Iteration:  330 Value:  -2.9936382736663103
+    Iteration:  331 Value:  -2.993765508192984
+    Iteration:  332 Value:  -2.993890198029124
+    Iteration:  333 Value:  -2.9940123940685415
+    Iteration:  334 Value:  -2.994132146187171
+    Iteration:  335 Value:  -2.9942495032634273
+    Iteration:  336 Value:  -2.9943645131981587
+    Iteration:  337 Value:  -2.9944772229341954
+    Iteration:  338 Value:  -2.9945876784755114
+    Iteration:  339 Value:  -2.9946959249060012
+    Iteration:  340 Value:  -2.9948020064078813
+    Iteration:  341 Value:  -2.9949059662797235
+    Iteration:  342 Value:  -2.9950078469541292
+    Iteration:  343 Value:  -2.995107690015047
+    Iteration:  344 Value:  -2.995205536214746
+    Iteration:  345 Value:  -2.995301425490451
+    Iteration:  346 Value:  -2.995395396980642
+    Iteration:  347 Value:  -2.9954874890410292
+    Iteration:  348 Value:  -2.9955777392602085
+    Iteration:  349 Value:  -2.9956661844750045
+    Iteration:  350 Value:  -2.9957528607855046
+    Iteration:  351 Value:  -2.9958378035697946
+    Iteration:  352 Value:  -2.9959210474983986
+    Iteration:  353 Value:  -2.9960026265484307
+    Iteration:  354 Value:  -2.996082574017462
+    Iteration:  355 Value:  -2.9961609225371126
+    Iteration:  356 Value:  -2.9962377040863704
+    Iteration:  357 Value:  -2.996312950004643
+    Iteration:  358 Value:  -2.9963866910045502
+    Iteration:  359 Value:  -2.9964589571844593
+    Iteration:  360 Value:  -2.9965297780407703
+    Iteration:  361 Value:  -2.996599182479955
+    Iteration:  362 Value:  -2.9966671988303557
+    Iteration:  363 Value:  -2.9967338548537485
+    Iteration:  364 Value:  -2.9967991777566736
+    Iteration:  365 Value:  -2.99686319420154
+    Iteration:  366 Value:  -2.9969259303175093
+    Iteration:  367 Value:  -2.9969874117111592
+    Iteration:  368 Value:  -2.997047663476936
+    Iteration:  369 Value:  -2.997106710207397
+    Iteration:  370 Value:  -2.997164576003249
+    Iteration:  371 Value:  -2.997221284483184
+    Iteration:  372 Value:  -2.99727685879352
+    Iteration:  373 Value:  -2.99733132161765
+    Iteration:  374 Value:  -2.9973846951852967
+    Iteration:  375 Value:  -2.997437001281591
+    Iteration:  376 Value:  -2.9974882612559592
+    Iteration:  377 Value:  -2.99753849603084
+    Iteration:  378 Value:  -2.9975877261102233
+    Iteration:  379 Value:  -2.9976359715880188
+    Iteration:  380 Value:  -2.9976832521562584
+    Iteration:  381 Value:  -2.9977295871131333
+    Iteration:  382 Value:  -2.9977749953708708
+    Iteration:  383 Value:  -2.997819495463453
+    Iteration:  384 Value:  -2.9978631055541842
+    Iteration:  385 Value:  -2.9979058434431005
+    Iteration:  386 Value:  -2.9979477265742385
+    Iteration:  387 Value:  -2.9979887720427536
+    Iteration:  388 Value:  -2.9980289966018985
+    Iteration:  389 Value:  -2.9980684166698603
+    Iteration:  390 Value:  -2.9981070483364634
+    Iteration:  391 Value:  -2.998144907369734
+    Iteration:  392 Value:  -2.9981820092223392
+    Iteration:  393 Value:  -2.9982183690378923
+    Iteration:  394 Value:  -2.9982540016571346
+    Iteration:  395 Value:  -2.998288921623992
+    Iteration:  396 Value:  -2.998323143191512
+    Iteration:  397 Value:  -2.998356680327682
+    Iteration:  398 Value:  -2.9983895467211283
+    Iteration:  399 Value:  -2.9984217557867057
+    Iteration:  400 Value:  -2.9984533206709716
+    Iteration:  401 Value:  -2.9984842542575523
+    Iteration:  402 Value:  -2.9985145691724013
+    Iteration:  403 Value:  -2.9985442777889535
+    Iteration:  404 Value:  -2.9985733922331743
+    Iteration:  405 Value:  -2.998601924388511
+    Iteration:  406 Value:  -2.9986298859007405
+    Iteration:  407 Value:  -2.998657288182726
+    Iteration:  408 Value:  -2.998684142419071
+    Iteration:  409 Value:  -2.9987104595706895
+    Iteration:  410 Value:  -2.9987362503792756
+    Iteration:  411 Value:  -2.99876152537169
+    Iteration:  412 Value:  -2.9987862948642565
+    Iteration:  413 Value:  -2.9988105689669715
+    Iteration:  414 Value:  -2.998834357587632
+    Iteration:  415 Value:  -2.9988576704358794
+    Iteration:  416 Value:  -2.9988805170271617
+    Iteration:  417 Value:  -2.9989029066866184
+    Iteration:  418 Value:  -2.998924848552886
+    Iteration:  419 Value:  -2.998946351581828
+    Iteration:  420 Value:  -2.998967424550192
+    Iteration:  421 Value:  -2.998988076059188
+    Iteration:  422 Value:  -2.9990083145380044
+    Iteration:  423 Value:  -2.9990281482472443
+    Iteration:  424 Value:  -2.9990475852822995
+    Iteration:  425 Value:  -2.9990666335766534
+    Iteration:  426 Value:  -2.9990853009051204
+    Iteration:  427 Value:  -2.999103594887018
+    Iteration:  428 Value:  -2.999121522989278
+    Iteration:  429 Value:  -2.999139092529492
+    Iteration:  430 Value:  -2.9991563106789023
+    Iteration:  431 Value:  -2.999173184465324
+    Iteration:  432 Value:  -2.999189720776018
+    Iteration:  433 Value:  -2.9992059263604975
+    Iteration:  434 Value:  -2.9992218078332877
+    Iteration:  435 Value:  -2.999237371676622
+    Iteration:  436 Value:  -2.9992526242430895
+    Iteration:  437 Value:  -2.9992675717582276
+    Iteration:  438 Value:  -2.999282220323063
+    Iteration:  439 Value:  -2.9992965759166017
+    Iteration:  440 Value:  -2.9993106443982698
+    Iteration:  441 Value:  -2.9993244315103045
+    Iteration:  442 Value:  -2.9993379428800986
+    Iteration:  443 Value:  -2.9993511840224967
+    Iteration:  444 Value:  -2.9993641603420467
+    Iteration:  445 Value:  -2.9993768771352056
+    Iteration:  446 Value:  -2.9993893395925015
+    Iteration:  447 Value:  -2.9994015528006517
+    Iteration:  448 Value:  -2.9994135217446387
+    Iteration:  449 Value:  -2.999425251309746
+    Iteration:  450 Value:  -2.999436746283551
+    Iteration:  451 Value:  -2.99944801135788
+    Iteration:  452 Value:  -2.9994590511307226
+    Iteration:  453 Value:  -2.999469870108108
+    Iteration:  454 Value:  -2.999480472705946
+    Iteration:  455 Value:  -2.999490863251827
+    Iteration:  456 Value:  -2.999501045986791
+    Iteration:  457 Value:  -2.999511025067055
+    Iteration:  458 Value:  -2.999520804565714
+    Iteration:  459 Value:  -2.9995303884744
+    Iteration:  460 Value:  -2.999539780704912
+    Iteration:  461 Value:  -2.9995489850908137
+    Iteration:  462 Value:  -2.999558005388997
+    Iteration:  463 Value:  -2.999566845281217
+    Iteration:  464 Value:  -2.999575508375593
+    Iteration:  465 Value:  -2.999583998208081
+    Iteration:  466 Value:  -2.9995923182439195
+    Iteration:  467 Value:  -2.999600471879041
+    Iteration:  468 Value:  -2.9996084624414605
+    Iteration:  469 Value:  -2.999616293192631
+    Iteration:  470 Value:  -2.9996239673287786
+    Iteration:  471 Value:  -2.999631487982203
+    Iteration:  472 Value:  -2.999638858222559
+    Iteration:  473 Value:  -2.9996460810581076
+    Iteration:  474 Value:  -2.9996531594369453
+    Iteration:  475 Value:  -2.9996600962482063
+    Iteration:  476 Value:  -2.999666894323242
+    Iteration:  477 Value:  -2.999673556436777
+    Iteration:  478 Value:  -2.9996800853080416
+    Iteration:  479 Value:  -2.999686483601881
+    Iteration:  480 Value:  -2.999692753929843
+    Iteration:  481 Value:  -2.9996988988512463
+    Iteration:  482 Value:  -2.9997049208742212
+    Iteration:  483 Value:  -2.999710822456737
+    Iteration:  484 Value:  -2.999716606007602
+    Iteration:  485 Value:  -2.9997222738874503
+    Iteration:  486 Value:  -2.9997278284097013
+    Iteration:  487 Value:  -2.9997332718415075
+    Iteration:  488 Value:  -2.9997386064046774
+    Iteration:  489 Value:  -2.999743834276584
+    Iteration:  490 Value:  -2.999748957591052
+    Iteration:  491 Value:  -2.999753978439231
+    Iteration:  492 Value:  -2.9997588988704464
+    Iteration:  493 Value:  -2.9997637208930374
+    Iteration:  494 Value:  -2.999768446475177
+    Iteration:  495 Value:  -2.9997730775456732
+    Iteration:  496 Value:  -2.9997776159947596
+    Iteration:  497 Value:  -2.999782063674864
+    Iteration:  498 Value:  -2.999786422401367
+    Iteration:  499 Value:  -2.9997906939533396
+    Iteration:  500 Value:  -2.9997948800742726
+    Iteration:  501 Value:  -2.9997989824727873
+    Iteration:  502 Value:  -2.999803002823332
+    Iteration:  503 Value:  -2.999806942766865
+    Iteration:  504 Value:  -2.9998108039115277
+    Iteration:  505 Value:  -2.999814587833297
+    Iteration:  506 Value:  -2.999818296076631
+    Iteration:  507 Value:  -2.9998219301550986
+    Iteration:  508 Value:  -2.9998254915519964
+    Iteration:  509 Value:  -2.9998289817209565
+    Iteration:  510 Value:  -2.9998324020865375
+    Iteration:  511 Value:  -2.9998357540448066
+    Iteration:  512 Value:  -2.9998390389639105
+    Iteration:  513 Value:  -2.9998422581846325
+    Iteration:  514 Value:  -2.9998454130209398
+    Iteration:  515 Value:  -2.999848504760521
+    Iteration:  516 Value:  -2.9998515346653107
+    Iteration:  517 Value:  -2.9998545039720046
+    Iteration:  518 Value:  -2.9998574138925647
+    Iteration:  519 Value:  -2.9998602656147133
+    Iteration:  520 Value:  -2.999863060302419
+    Iteration:  521 Value:  -2.9998657990963706
+    Iteration:  522 Value:  -2.9998684831144433
+    Iteration:  523 Value:  -2.9998711134521545
+    Iteration:  524 Value:  -2.9998736911831116
+    Iteration:  525 Value:  -2.9998762173594495
+    Iteration:  526 Value:  -2.9998786930122607
+    Iteration:  527 Value:  -2.9998811191520156
+    Iteration:  528 Value:  -2.9998834967689754
+    Iteration:  529 Value:  -2.9998858268335957
+    Iteration:  530 Value:  -2.999888110296924
+    Iteration:  531 Value:  -2.9998903480909855
+    Iteration:  532 Value:  -2.999892541129166
+    Iteration:  533 Value:  -2.9998946903065824
+    Iteration:  534 Value:  -2.9998967965004506
+    Iteration:  535 Value:  -2.9998988605704415
+    Iteration:  536 Value:  -2.999900883359033
+    Iteration:  537 Value:  -2.999902865691852
+    Iteration:  538 Value:  -2.999904808378015
+    Iteration:  539 Value:  -2.999906712210455
+    Iteration:  540 Value:  -2.9999085779662455
+    Iteration:  541 Value:  -2.9999104064069204
+    Iteration:  542 Value:  -2.999912198278782
+    Iteration:  543 Value:  -2.9999139543132065
+    Iteration:  544 Value:  -2.9999156752269425
+    Iteration:  545 Value:  -2.9999173617224035
+    Iteration:  546 Value:  -2.9999190144879555
+    Iteration:  547 Value:  -2.9999206341981965
+    Iteration:  548 Value:  -2.9999222215142325
+    Iteration:  549 Value:  -2.9999237770839478
+    Iteration:  550 Value:  -2.9999253015422687
+    Iteration:  551 Value:  -2.9999267955114233
+    Iteration:  552 Value:  -2.999928259601195
+    Iteration:  553 Value:  -2.999929694409171
+    Iteration:  554 Value:  -2.9999311005209877
+    Iteration:  555 Value:  -2.999932478510568
+    Iteration:  556 Value:  -2.9999338289403563
+    Iteration:  557 Value:  -2.9999351523615494
+    Iteration:  558 Value:  -2.9999364493143186
+    Iteration:  559 Value:  -2.9999377203280324
+    Iteration:  560 Value:  -2.999938965921472
+    Iteration:  561 Value:  -2.9999401866030424
+    Iteration:  562 Value:  -2.9999413828709818
+    Iteration:  563 Value:  -2.999942555213562
+    Iteration:  564 Value:  -2.999943704109291
+    Iteration:  565 Value:  -2.999944830027105
+    Iteration:  566 Value:  -2.999945933426563
+    Iteration:  567 Value:  -2.999947014758032
+    Iteration:  568 Value:  -2.9999480744628713
+    Iteration:  569 Value:  -2.999949112973614
+    Iteration:  570 Value:  -2.999950130714142
+    Iteration:  571 Value:  -2.999951128099859
+
+    print('Local Minima : ', x_current)
+
+    Local Minima :  -2.999951128099859
+
+    # Plotting the convergence of x values
+    plt.plot(range(iters), gd)
+
+    [<matplotlib.lines.Line2D at 0x204c87891f0>]
+
+[]
+
+    # import numpy as np
+    # import matplotlib.pyplot as plt
+
+    # # Initialize parameters
+    # x = 2  # Starting point
+    # lr = 0.01  # Learning Rate
+    # precision = 0.000001
+    # previous_step_size = 1
+    # max_iter = 10000
+    # iters = 0
+
+    # # Gradient function: derivative of (x + 3)^2
+    # gf = lambda x: 2 * (x + 3)
+
+    # # List to store the values of x for plotting
+    # gd = []
+
+    # # Gradient Descent Loop
+    # while previous_step_size > precision and iters < max_iter:
+    #     prev = x
+    #     x = x - lr * gf(prev)  # Update x using the gradient
+    #     previous_step_size = abs(x - prev)  # Calculate the step size
+    #     iters += 1
+    #     print('Iteration: ', iters, 'Value: ', x)
+    #     gd.append(x)
+
+    # print('Local Minima: ', x)
+
+    # # Plotting the convergence of x values
+    # plt.plot(range(iters), gd)
+
+    # pip install sympy
